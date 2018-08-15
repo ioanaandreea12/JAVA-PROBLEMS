@@ -63,7 +63,94 @@ public class Entropy {
 			return entropy;
 		}
 		//d)
+		 public static int[][] charCountArray(String a[])
+		 {
+			 int [][] b = new int [a.length][26];
+			 int [] valuescolumn = new int [a.length];
+			
+			 for(int i='a';i<='z';i++)
+			 {
+				 int ok = 0;
+				 int j=0;
+				 while(ok==0 && j<a.length)
+				 {
+					 if(isValid((char) (i+'0'),a[j]) ==false)
+					 {
+						 ok=1;
+					 }
+					 j++;
+				 }
+				 int k=0;
+				 if(ok==0)
+				 {
+					 for(int i1=0;i1<a.length;i1++)
+					 {
+						 b[i1][k] = countOccurencies((char) (i+'0'),a[i1]);
+						 
+						 k++;
+					 }
+				 }
+			 }
+			 for(int round =0;round<a.length;round++)
+			 {
+				 int [] array = new int [26];
+				 int position =0; 
+				 for(int k1=0;k1<b.length;k1++)
+				 {
+					array[position] = b[round][k1];
+					position++;
+				 }
+				 sort(array);
+				 position=0;
+				 for(int k2=0;k2<b.length;k2++)
+				 {
+					 b[round][k2]=array[position];
+					 position++;
+				 }
+			 }
+			 return b;
+			 
+		 }
 		
+		 public static boolean isValid(char a, String s)
+		 {
+			 for(int i=0;i<s.length();i++)
+			 {
+				 if(a==s.charAt(i))
+				 {
+					 return true;
+				 }
+			 }
+			 return false;
+		 }
+		 public static  int countOccurencies ( char a,String s)
+		 {
+			 int count =0;
+			 for(int i=0;i<s.length();i++)
+			 {
+				 if(a==s.charAt(i))
+				 {
+					 count++;
+				 }
+			 }
+			 return count;
+		 }
+		 public static int [] sort ( int [] array)
+		 {
+			 for(int i=0;i<array.length;i++)
+			 {
+				 for(int j=i;j<array.length-1;j++)
+				 {
+					 if(array[j]<array[i])
+					 {
+						 int aux =  array[j];
+						 array[j] =array[i];
+						 array[i]=aux;
+					 }
+				 }
+			 }
+			 return array;
+		 }
 		
 		
 		//e)
